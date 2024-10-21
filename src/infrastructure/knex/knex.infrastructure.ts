@@ -96,7 +96,9 @@ export class UnitOfWork<RepositoryMap = object>
         if (prop in target) {
           const repository = target[prop] as IRepository;
 
-          return repository.useDatabase(this._db);
+          if (this._tx) {
+            return repository.useDatabase(new KnexDb(this._tx));
+          }
         }
 
         return undefined;
