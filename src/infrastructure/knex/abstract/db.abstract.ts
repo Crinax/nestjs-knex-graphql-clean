@@ -5,7 +5,7 @@ export abstract class IDb<DbConnection = any> {
 export abstract class IRepository {
   abstract useDatabase<Database extends IDb<DbConnection>, DbConnection = any>(
     database: Database,
-  ): Promise<IRepository>;
+  ): IRepository;
 }
 
 export type Work<WorkResult = any, RepositoryMap = object, UoW = any> = (
