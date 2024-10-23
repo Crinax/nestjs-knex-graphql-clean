@@ -32,7 +32,7 @@ export class UnitOfWork<RepositoryMap = object>
     this._repositories = repositories;
   }
 
-  use<K extends string, R extends IRepository>(
+  use<K extends string, R extends IRepository<KnexDb>>(
     key: K,
     repository: R,
   ): IUnitOfWork<KnexDb, { [I in K]: R } & RepositoryMap> {
@@ -94,7 +94,7 @@ export class UnitOfWork<RepositoryMap = object>
     const proxy = new Proxy(this._repositories as object, {
       get: (target, prop) => {
         if (prop in target) {
-          const repository = target[prop] as IRepository;
+          const repository = target[prop] as IRepository<KnexDb>;
 
           if (this._tx) {
             return repository.useDatabase(new KnexDb(this._tx));

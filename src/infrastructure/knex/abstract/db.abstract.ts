@@ -2,10 +2,8 @@ export abstract class IDb<DbConnection = any> {
   abstract getConnection(): Promise<DbConnection>;
 }
 
-export abstract class IRepository {
-  abstract useDatabase<Database extends IDb<DbConnection>, DbConnection = any>(
-    database: Database,
-  ): IRepository;
+export abstract class IRepository<Database> {
+  abstract useDatabase(database: Database): IRepository<Database>;
 }
 
 export type Work<WorkResult = any, RepositoryMap = object, UoW = any> = (
@@ -14,7 +12,7 @@ export type Work<WorkResult = any, RepositoryMap = object, UoW = any> = (
 ) => Promise<WorkResult>;
 
 export abstract class IUnitOfWork<Database = any, RepositoryMap = object> {
-  abstract use<K extends string, R extends IRepository>(
+  abstract use<K extends string, R extends IRepository<Database>>(
     key: K,
     repository: R,
   ): IUnitOfWork<Database, { [I in K]: R } & RepositoryMap>;
