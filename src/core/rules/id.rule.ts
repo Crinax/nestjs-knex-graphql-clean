@@ -5,7 +5,7 @@ export class IdRule implements BuisenessRule<number> {
   constructor(public readonly value: number) {}
 
   isValid(): boolean {
-    if (this.value <= 0) {
+    if (this.value < 0) {
       return false;
     }
 
