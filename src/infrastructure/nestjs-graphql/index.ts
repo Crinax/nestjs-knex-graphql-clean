@@ -12,7 +12,7 @@ export const defineGraphQlModule = () => {
     },
     autoSchemaFile: join(
       Config.rootPath,
-      'src/infrastructure/graphql/schema/schema.gql',
+      'src/infrastructure/nestjs-graphql/schema/schema.gql',
     ),
     sortSchema: true,
   });

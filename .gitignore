@@ -6,6 +6,9 @@
 # local db
 /src/infrastructure/knex/dev.sqlite3
 
+# GraphQL schema
+/src/infrastructure/nestjs-graphql/schema
+
 # Logs
 logs
 *.log
