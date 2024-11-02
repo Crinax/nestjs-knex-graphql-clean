@@ -3,10 +3,10 @@ import { TextRule } from 'src/core/rules/text.rule';
 import { TaskProps } from 'src/core/task/entities/taks.prop';
 import { TaskEntity } from 'src/core/task/entities/task.entity';
 import { UpdateTaskNameCommand } from 'src/core/task/ports/primary/commands/tasks/update-name.command';
-import { TaskResponse } from 'src/core/task/ports/primary/use-cases/tasks/responses';
-import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/tasks/update-task-name.use-case';
-import { TaskLoaderByIdPort } from 'src/core/task/ports/secondary/task/task-loader-id.port';
-import { TaskSavePort } from 'src/core/task/ports/secondary/task/task-save.port';
+import { TaskResponse } from 'src/core/task/ports/primary/use-cases/responses';
+import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/update-task-name.use-case';
+import { TaskLoaderByIdPort } from 'src/core/task/ports/secondary/task-loader-id.port';
+import { TaskSavePort } from 'src/core/task/ports/secondary/task-save.port';
 import { IRepository } from 'src/infrastructure/knex/abstract/db.abstract';
 import {
   KnexDb,
