@@ -6,13 +6,6 @@ import {
   Work,
 } from 'src/infrastructure/knex/abstract/db.abstract';
 
-// const knexDb = knex({
-//   client: 'sqlite3',
-//   connection: {
-//     filename: './db.sqlite3',
-//   },
-// });
-
 export class KnexDb implements IDb<Knex> {
   private _connection: Knex;
 
