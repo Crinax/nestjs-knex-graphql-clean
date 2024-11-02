@@ -1,5 +1,5 @@
-import { Entity } from '../../abstracts/entity.abstract';
-import { TaskProps } from './taks.prop';
+import { Entity } from 'src/core/abstracts/entity.abstract';
+import { TaskProps } from 'src/core/task/entities/taks.prop';
 
 export class TaskEntity implements Entity {
   private props: TaskProps;

@@ -1,6 +1,6 @@
-import { TaskProps } from 'src/core/entities/task/taks.prop';
-import { TaskEntity } from 'src/core/entities/task/task.entity';
-import { TaskLoadResponse } from '../task-repository.responses';
+import { TaskProps } from 'src/core/task/entities/taks.prop';
+import { TaskEntity } from 'src/core/task/entities/task.entity';
+import { TaskLoadResponse } from 'src/infrastructure/knex/repositories/task/task-repository.responses';
 
 export class TaskRepositoryMapper {
   private constructor() {

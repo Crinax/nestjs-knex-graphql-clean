@@ -1,11 +1,11 @@
-import { TaskEntity } from 'src/core/entities/task/task.entity';
-import { TaskLoaderByIdPort } from 'src/core/ports/secondary/task/task-loader-id.port';
-import { TaskLoaderPort } from 'src/core/ports/secondary/task/task-loader.port';
-import { TaskSavePort } from 'src/core/ports/secondary/task/task-save.port';
-import { IRepository } from '../../abstract/db.abstract';
-import { KnexDb } from '../../knex.infrastructure';
-import { TaskRepositoryMapper } from './mappers/task-repository.mapper';
-import { TaskLoadResponse } from './task-repository.responses';
+import { TaskEntity } from 'src/core/task/entities/task.entity';
+import { TaskLoaderByIdPort } from 'src/core/task/ports/secondary/task/task-loader-id.port';
+import { TaskLoaderPort } from 'src/core/task/ports/secondary/task/task-loader.port';
+import { TaskSavePort } from 'src/core/task/ports/secondary/task/task-save.port';
+import { IRepository } from 'src/infrastructure/knex/abstract/db.abstract';
+import { KnexDb } from 'src/infrastructure/knex/knex.infrastructure';
+import { TaskRepositoryMapper } from 'src/infrastructure/knex/repositories/task/mappers/task-repository.mapper';
+import { TaskLoadResponse } from 'src/infrastructure/knex/repositories/task/task-repository.responses';
 
 export class TaskRepository
   implements

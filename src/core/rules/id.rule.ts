@@ -1,5 +1,5 @@
-import { BuisenessRuleError } from './buiseness-rule.error';
-import { BuisenessRule } from './buiseness.rule';
+import { BuisenessRuleError } from 'src/core/rules/buiseness-rule.error';
+import { BuisenessRule } from 'src/core/rules/buiseness.rule';
 
 export class IdRule implements BuisenessRule<number> {
   constructor(public readonly value: number) {}

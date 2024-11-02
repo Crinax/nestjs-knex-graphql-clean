@@ -1,5 +1,10 @@
 import { Knex } from 'knex';
-import { IDb, IRepository, IUnitOfWork, Work } from './abstract/db.abstract';
+import {
+  IDb,
+  IRepository,
+  IUnitOfWork,
+  Work,
+} from 'src/infrastructure/knex/abstract/db.abstract';
 
 // const knexDb = knex({
 //   client: 'sqlite3',
