@@ -96,19 +96,22 @@ export class UnitOfWork<RepositoryMap = object>
       throw new Error('Transaction not started');
     }
 
-    const proxy = new Proxy(this._repositories as object, {
-      get: (target, prop) => {
-        if (prop in target) {
-          const repository = target[prop] as IRepository<KnexDb>;
+    const proxy = new Proxy(
+      this._repositories as Record<string | symbol, IRepository<KnexDb>>,
+      {
+        get: (target, prop) => {
+          if (prop in target) {
+            const repository = target[prop] as IRepository<KnexDb>;
 
-          if (this._tx) {
-            return repository.useDatabase(new KnexDb(this._tx));
+            if (this._tx) {
+              return repository.useDatabase(new KnexDb(this._tx));
+            }
           }
-        }
 
-        return undefined;
+          return undefined;
+        },
       },
-    });
+    );
 
     try {
       await this.begin();
