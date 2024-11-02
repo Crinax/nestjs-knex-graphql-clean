@@ -30,9 +30,7 @@ export class TaskUpdateNameService implements UpdateTaskNameUseCase {
     const result = await this.unitOfWork
       .use('loader', this.loadPort)
       .use('saver', this.savePort)
-      .exec(async (uow, { loader, saver }) => {
-        uow.begin();
-
+      .exec(async (_uow, { loader, saver }) => {
         const task = await loader.loadById(idRule.value);
 
         if (!task) {
@@ -50,7 +48,6 @@ export class TaskUpdateNameService implements UpdateTaskNameUseCase {
 
         const saved = await saver.save(newTask);
 
-        uow.commit();
         return saved;
       });
 
