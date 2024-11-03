@@ -3,12 +3,11 @@ import {
   defineGraphQlModule,
   defineResolvers,
 } from 'src/infrastructure/nestjs-graphql';
-import { KnexProvider } from 'src/infrastructure/nestjs/adapters/knex/knex.provider';
-import { TaskGetByIdServiceProvider } from 'src/infrastructure/nestjs/adapters/services/tasks/task-get-by-id-service.provider';
+import { TaskModule } from 'src/infrastructure/nestjs/adapters/tasks/task.module';
 
 @Module({
-  imports: [defineGraphQlModule()],
+  imports: [defineGraphQlModule(), TaskModule],
   controllers: [],
-  providers: [KnexProvider, TaskGetByIdServiceProvider, ...defineResolvers()],
+  providers: defineResolvers(),
 })
 export class AppModule {}
