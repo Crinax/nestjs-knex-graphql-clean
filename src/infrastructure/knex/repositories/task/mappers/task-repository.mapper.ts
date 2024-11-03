@@ -11,8 +11,8 @@ export class TaskRepositoryMapper {
     const props = TaskProps.from(
       task.id,
       task.name,
-      task.created_at,
-      task.updated_at,
+      new Date(task.created_at),
+      new Date(task.updated_at),
     );
 
     return new TaskEntity(props);
