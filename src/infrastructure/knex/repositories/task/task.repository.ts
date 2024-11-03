@@ -23,24 +23,37 @@ export class TaskRepository
   async save(task: TaskEntity): Promise<TaskEntity> {
     const connection = await this.database.getConnection();
 
-    let result: TaskLoadResponse;
-    if (task.id > 0) {
-      result = await connection<TaskLoadResponse>('tasks').insert({
-        name: task.name,
-        created_at: task.createdAt,
-        updated_at: task.updatedAt,
-      });
-    } else {
+    let result: TaskLoadResponse[];
+    if (task.id === 0) {
       result = await connection<TaskLoadResponse>('tasks')
+        .insert({
+          name: task.name,
+          created_at: task.createdAt,
+          updated_at: task.updatedAt,
+        })
+        .returning<TaskLoadResponse[]>([
+          'id',
+          'name',
+          'created_at',
+          'updated_at',
+        ]);
+    } else {
+      result = await connection('tasks')
         .where({ id: task.id })
         .update({
           name: task.name,
           created_at: task.createdAt,
           updated_at: task.updatedAt,
-        });
+        })
+        .returning<TaskLoadResponse[]>([
+          'id',
+          'name',
+          'created_at',
+          'updated_at',
+        ]);
     }
 
-    return TaskRepositoryMapper.toDomain(result);
+    return TaskRepositoryMapper.toDomain(result[0]);
   }
 
   async loadById(id: number): Promise<TaskEntity | null> {
