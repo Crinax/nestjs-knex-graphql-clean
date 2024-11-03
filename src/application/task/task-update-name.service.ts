@@ -1,8 +1,6 @@
 import { TaskServiceMapper } from 'src/application/task/mappers';
 import { IdRule } from 'src/core/rules/id.rule';
 import { TextRule } from 'src/core/rules/text.rule';
-import { TaskProps } from 'src/core/task/entities/taks.prop';
-import { TaskEntity } from 'src/core/task/entities/task.entity';
 import { UpdateTaskNameCommand } from 'src/core/task/ports/primary/commands/update-name.command';
 import { TaskResponse } from 'src/core/task/ports/primary/responses';
 import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/update-task-name.use-case';
@@ -38,16 +36,9 @@ export class TaskUpdateNameService implements UpdateTaskNameUseCase {
           throw new Error('Task not found');
         }
 
-        const newTaskProps = TaskProps.from(
-          idRule.value,
-          nameRule.value,
-          task.createdAt,
-          new Date(),
-        );
+        task.updateName(nameRule);
 
-        const newTask = new TaskEntity(newTaskProps);
-
-        const saved = await saver.save(newTask);
+        const saved = await saver.save(task);
 
         return saved;
       });
