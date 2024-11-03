@@ -1,9 +1,10 @@
+import { TaskServiceMapper } from 'src/application/task/mappers';
 import { IdRule } from 'src/core/rules/id.rule';
 import { TextRule } from 'src/core/rules/text.rule';
 import { TaskProps } from 'src/core/task/entities/taks.prop';
 import { TaskEntity } from 'src/core/task/entities/task.entity';
 import { UpdateTaskNameCommand } from 'src/core/task/ports/primary/commands/update-name.command';
-import { TaskResponse } from 'src/core/task/ports/primary/use-cases/responses';
+import { TaskResponse } from 'src/core/task/ports/primary/responses';
 import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/update-task-name.use-case';
 import { TaskLoaderByIdPort } from 'src/core/task/ports/secondary/task-loader-id.port';
 import { TaskSavePort } from 'src/core/task/ports/secondary/task-save.port';
@@ -51,11 +52,6 @@ export class TaskUpdateNameService implements UpdateTaskNameUseCase {
         return saved;
       });
 
-    return {
-      id: result.id,
-      name: result.name,
-      createdAt: result.createdAt,
-      updatedAt: result.updatedAt,
-    };
+    return TaskServiceMapper.toResponse(result);
   }
 }
