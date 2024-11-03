@@ -5,6 +5,7 @@ import {
   IUnitOfWork,
   Work,
 } from 'src/infrastructure/knex/abstract/db.abstract';
+import { UnitOfWorkError } from 'src/infrastructure/knex/errors/uow.error';
 
 export class KnexDb implements IDb<Knex> {
   private _connection: Knex;
@@ -25,7 +26,10 @@ export class UnitOfWork<RepositoryMap = object>
   private _tx: Knex.Transaction | null = null;
   private _repositories: RepositoryMap;
 
-  private constructor(db: IDb<Knex>, repositories: RepositoryMap) {
+  constructor(
+    db: IDb<Knex>,
+    repositories: RepositoryMap = {} as RepositoryMap,
+  ) {
     this._db = db;
     this._repositories = repositories;
   }
@@ -85,36 +89,39 @@ export class UnitOfWork<RepositoryMap = object>
   async exec<Result>(
     work: Work<Result, RepositoryMap, IUnitOfWork<KnexDb, RepositoryMap>>,
   ): Promise<Result> {
-    if (!this._tx) {
-      throw new Error('Transaction not started');
-    }
-
-    const proxy = new Proxy(
-      this._repositories as Record<string | symbol, IRepository<KnexDb>>,
-      {
-        get: (target, prop) => {
-          if (prop in target) {
-            const repository = target[prop] as IRepository<KnexDb>;
-
-            if (this._tx) {
-              return repository.useDatabase(new KnexDb(this._tx));
-            }
-          }
-
-          return undefined;
-        },
-      },
-    );
-
     try {
       await this.begin();
+
+      if (!this._tx) {
+        throw new UnitOfWorkError('Execution', 'Transaction not started');
+      }
+
+      const proxy = new Proxy(
+        this._repositories as Record<string | symbol, IRepository<KnexDb>>,
+        {
+          get: (target, prop) => {
+            if (prop in target) {
+              const repository = target[prop] as IRepository<KnexDb>;
+
+              if (this._tx) {
+                return repository.useDatabase(new KnexDb(this._tx));
+              }
+            }
+
+            return undefined;
+          },
+        },
+      );
 
       const result = await work(this, proxy as RepositoryMap);
 
       await this.commit();
       return result;
     } catch (err) {
-      await this.rollback();
+      if (this._tx) {
+        await this.rollback();
+      }
+
       throw err;
     }
   }
