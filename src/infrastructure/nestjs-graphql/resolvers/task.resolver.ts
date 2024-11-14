@@ -35,7 +35,7 @@ export class TaskResolver {
     @Args('updateInput') input: UpdateTaskNameInput,
   ): Promise<Task> {
     return this.updateTaskNameUseCase.update(
-      new UpdateTaskNameCommand(input.id, input.name),
+      UpdateTaskNameCommand.from(input.id, input.name),
     );
   }
 

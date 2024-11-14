@@ -1,6 +1,4 @@
 import { TaskServiceMapper } from 'src/application/task/mappers';
-import { IdRule } from 'src/core/rules/id.rule';
-import { TextRule } from 'src/core/rules/text.rule';
 import { UpdateTaskNameCommand } from 'src/core/task/ports/primary/commands/update-name.command';
 import { TaskResponse } from 'src/core/task/ports/primary/responses';
 import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/update-task-name.use-case';
@@ -20,23 +18,17 @@ export class TaskUpdateNameService implements UpdateTaskNameUseCase {
   ) {}
 
   async update(command: UpdateTaskNameCommand): Promise<TaskResponse> {
-    const idRule = new IdRule(command.id);
-    const nameRule = new TextRule(command.name, 1);
-
-    idRule.check();
-    nameRule.check();
-
     const result = await this.unitOfWork
       .use('loader', this.loadPort)
       .use('saver', this.savePort)
       .exec(async (_uow, { loader, saver }) => {
-        const task = await loader.loadById(idRule.value);
+        const task = await loader.loadById(command.id.value);
 
         if (!task) {
           throw new Error('Task not found');
         }
 
-        task.updateName(nameRule);
+        task.updateName(command.name);
 
         const saved = await saver.save(task);
 
