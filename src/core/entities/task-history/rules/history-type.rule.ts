@@ -1,10 +1,10 @@
 import { BuisenessRuleError } from 'src/core/rules/buiseness-rule.error';
 import { BuisenessRule } from 'src/core/rules/buiseness.rule';
 
-const TaskHistoryTypeMap: Record<string, string> = {
+export const TaskHistoryTypeMap = {
   created: 'task_created',
   name_updated: 'task_name_updated',
-};
+} as const;
 
 export class TaskHistoryTypeRule implements BuisenessRule<string> {
   constructor(private readonly _value: string) {}
@@ -12,11 +12,11 @@ export class TaskHistoryTypeRule implements BuisenessRule<string> {
   public get value(): string {
     this.check();
 
-    return TaskHistoryTypeMap[this._value]!;
+    return Reflect.get(TaskHistoryTypeMap, this._value);
   }
 
   isValid(): boolean {
-    return TaskHistoryTypeMap[this._value] !== undefined;
+    return this._value in TaskHistoryTypeMap;
   }
 
   check(): void {

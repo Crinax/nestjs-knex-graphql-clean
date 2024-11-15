@@ -7,5 +7,8 @@ export class TaskEvents {
 
 export type TaskEventsDtos = {
   [TaskEvents.TASK_CREATED]: TaskEntity;
-  [TaskEvents.TASK_NAME_UPDATED]: TaskEntity;
+  [TaskEvents.TASK_NAME_UPDATED]: {
+    task: TaskEntity;
+    oldName: string;
+  };
 };
