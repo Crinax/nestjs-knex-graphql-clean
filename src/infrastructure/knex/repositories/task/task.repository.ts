@@ -18,10 +18,6 @@ export class TaskRepository
 {
   constructor(private readonly database: KnexDb) {}
 
-  useDatabase(database: KnexDb) {
-    return new TaskRepository(database);
-  }
-
   async save(task: TaskEntity): Promise<TaskEntity> {
     const connection = await this.database.getConnection();
 
