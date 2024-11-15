@@ -1,4 +1,4 @@
-import { DomainEvent, EventDtos } from 'src/core/abstracts/events';
+import { DomainEvent, EventDtos } from 'src/core/events';
 
 export abstract class IEventBus {
   abstract publish<T extends keyof EventDtos>(

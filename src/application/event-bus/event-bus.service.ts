@@ -1,5 +1,5 @@
 import { IEventBus } from 'src/core/abstracts/event-bus.abstract';
-import { DomainEvent, EventDtos } from 'src/core/abstracts/events';
+import { DomainEvent, EventDtos } from 'src/core/events';
 
 type HandlersMap = {
   [K in keyof EventDtos]?: ((event: DomainEvent<K>) => void | Promise<void>)[];
