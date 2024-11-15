@@ -55,7 +55,8 @@ export class TaskRepository
         ]);
     }
 
-    return TaskRepositoryMapper.toDomain(result[0]);
+    // TODO: Error handling
+    return TaskRepositoryMapper.toDomain(result[0]!);
   }
 
   async loadById(id: IdRule): Promise<TaskEntity | null> {
@@ -86,6 +87,7 @@ export class TaskRepository
       })
       .returning(['id', 'name', 'created_at', 'updated_at']);
 
-    return TaskRepositoryMapper.toDomain(task[0]);
+    // TODO: Error handling
+    return TaskRepositoryMapper.toDomain(task[0]!);
   }
 }
