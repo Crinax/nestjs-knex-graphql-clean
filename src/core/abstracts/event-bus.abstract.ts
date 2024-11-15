@@ -7,6 +7,6 @@ export abstract class IEventBus {
 
   abstract subscribe<T extends keyof EventDtos>(
     name: T,
-    handler: (event: DomainEvent<T>) => void,
+    handler: (event: DomainEvent<T>) => void | Promise<void>,
   ): Promise<void>;
 }
