@@ -1,5 +1,4 @@
 import { Entity } from 'src/core/abstracts/entity.abstract';
-import { TextRule } from 'src/core/rules/text.rule';
 import { TaskProps } from 'src/core/entities/task/taks.prop';
 
 export class TaskEntity implements Entity {
@@ -29,9 +28,5 @@ export class TaskEntity implements Entity {
 
   get updatedAt(): Date {
     return this._updatedAt;
-  }
-
-  updateName(name: TextRule): void {
-    this._name = name.value;
   }
 }
