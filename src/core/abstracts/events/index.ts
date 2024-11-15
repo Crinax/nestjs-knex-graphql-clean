@@ -1,7 +1,7 @@
-import { TaskEntity } from 'src/core/task/entities/task.entity';
+import { TaskEventsDtos } from 'src/core/abstracts/events/task.events';
 
 export type EventDtos = {
-  task_name_updated: TaskEntity;
+  [K in keyof TaskEventsDtos]: TaskEventsDtos[K];
 };
 
 export type DomainEvent<EventName extends keyof EventDtos> = {
