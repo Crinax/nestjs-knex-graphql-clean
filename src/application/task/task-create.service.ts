@@ -1,12 +1,12 @@
 import { TaskServiceMapper } from 'src/application/task/mappers';
 import { IEventBus } from 'src/core/abstracts/event-bus.abstract';
 import { TaskEvents } from 'src/core/events/task.events';
-import { TaskProps } from 'src/core/task/entities/taks.prop';
-import { TaskEntity } from 'src/core/task/entities/task.entity';
-import { CreateTaskCommand } from 'src/core/task/ports/primary/commands/create-task.command';
-import { TaskResponse } from 'src/core/task/ports/primary/responses';
-import { CreateTaskUseCase } from 'src/core/task/ports/primary/use-cases/create-task.use-case';
-import { TaskSavePort } from 'src/core/task/ports/secondary/task-save.port';
+import { CreateTaskCommand } from 'src/core/ports/task/primary/commands/create-task.command';
+import { TaskResponse } from 'src/core/ports/task/primary/responses';
+import { CreateTaskUseCase } from 'src/core/ports/task/primary/use-cases/create-task.use-case';
+import { TaskSavePort } from 'src/core/ports/task/secondary/task-save.port';
+import { TaskProps } from 'src/core/entities/task/taks.prop';
+import { TaskEntity } from 'src/core/entities/task/task.entity';
 
 export class TaskCreateService implements CreateTaskUseCase {
   constructor(

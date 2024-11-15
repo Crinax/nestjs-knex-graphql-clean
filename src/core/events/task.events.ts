@@ -1,4 +1,4 @@
-import { TaskEntity } from 'src/core/task/entities/task.entity';
+import { TaskEntity } from 'src/core/entities/task/task.entity';
 
 export class TaskEvents {
   static readonly TASK_CREATED = Symbol('task_created');

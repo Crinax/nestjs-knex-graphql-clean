@@ -1,5 +1,5 @@
-import { TaskEntity } from 'src/core/task/entities/task.entity';
-import { TaskResponse } from 'src/core/task/ports/primary/responses';
+import { TaskResponse } from 'src/core/ports/task/primary/responses';
+import { TaskEntity } from 'src/core/entities/task/task.entity';
 
 export class TaskServiceMapper {
   private constructor() {

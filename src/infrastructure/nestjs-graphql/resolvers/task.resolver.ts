@@ -1,10 +1,10 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateTaskCommand } from 'src/core/task/ports/primary/commands/create-task.command';
-import { UpdateTaskNameCommand } from 'src/core/task/ports/primary/commands/update-name.command';
-import { GetAllTaskQuery } from 'src/core/task/ports/primary/queries/get-all-task.query';
-import { GetTaskByIdQuery } from 'src/core/task/ports/primary/queries/get-task-by-id.query';
-import { CreateTaskUseCase } from 'src/core/task/ports/primary/use-cases/create-task.use-case';
-import { UpdateTaskNameUseCase } from 'src/core/task/ports/primary/use-cases/update-task-name.use-case';
+import { CreateTaskCommand } from 'src/core/ports/task/primary/commands/create-task.command';
+import { UpdateTaskNameCommand } from 'src/core/ports/task/primary/commands/update-name.command';
+import { GetAllTaskQuery } from 'src/core/ports/task/primary/queries/get-all-task.query';
+import { GetTaskByIdQuery } from 'src/core/ports/task/primary/queries/get-task-by-id.query';
+import { CreateTaskUseCase } from 'src/core/ports/task/primary/use-cases/create-task.use-case';
+import { UpdateTaskNameUseCase } from 'src/core/ports/task/primary/use-cases/update-task-name.use-case';
 import {
   CreateTaskInput,
   UpdateTaskNameInput,
