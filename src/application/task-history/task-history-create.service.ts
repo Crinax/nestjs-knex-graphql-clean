@@ -20,7 +20,7 @@ export class TaskHistoryCreateService implements TaskHistoryCreateUseCase {
           TaskHistoryCreateCommand.from(
             event.data,
             '',
-            TaskHistoryTypeMap.created,
+            TaskHistoryTypeMap.CREATED,
           ),
         );
       });
@@ -30,7 +30,7 @@ export class TaskHistoryCreateService implements TaskHistoryCreateUseCase {
           TaskHistoryCreateCommand.from(
             event.data.task,
             event.data.oldName,
-            TaskHistoryTypeMap.name_updated,
+            TaskHistoryTypeMap.NAME_UPDATED,
           ),
         );
       });

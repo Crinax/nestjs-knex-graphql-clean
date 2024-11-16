@@ -2,8 +2,8 @@ import { BuisenessRuleError } from 'src/core/rules/buiseness-rule.error';
 import { BuisenessRule } from 'src/core/rules/buiseness.rule';
 
 export const TaskHistoryTypeMap = {
-  created: 'task_created',
-  name_updated: 'task_name_updated',
+  CREATED: 'task_created',
+  NAME_UPDATED: 'task_name_updated',
 } as const;
 
 export class TaskHistoryTypeRule implements BuisenessRule<string> {
@@ -16,7 +16,9 @@ export class TaskHistoryTypeRule implements BuisenessRule<string> {
   }
 
   isValid(): boolean {
-    return this._value in TaskHistoryTypeMap;
+    const values: string[] = Object.values(TaskHistoryTypeMap);
+
+    return values.includes(this._value);
   }
 
   check(): void {
