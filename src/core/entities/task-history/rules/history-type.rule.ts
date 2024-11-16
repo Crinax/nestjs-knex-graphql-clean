@@ -7,25 +7,19 @@ export const TaskHistoryTypeMap = {
 } as const;
 
 export class TaskHistoryTypeRule implements BuisenessRule<string> {
-  constructor(private readonly _value: string) {}
-
-  public get value(): string {
-    this.check();
-
-    return Reflect.get(TaskHistoryTypeMap, this._value);
-  }
+  constructor(public readonly value: string) {}
 
   isValid(): boolean {
     const values: string[] = Object.values(TaskHistoryTypeMap);
 
-    return values.includes(this._value);
+    return values.includes(this.value);
   }
 
   check(): void {
     if (!this.isValid()) {
       throw new BuisenessRuleError(
         'HistoryType',
-        'should a valid history type',
+        'should be a valid history type',
       );
     }
   }

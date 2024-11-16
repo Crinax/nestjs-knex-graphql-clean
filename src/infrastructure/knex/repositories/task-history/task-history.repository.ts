@@ -40,19 +40,20 @@ export class TaskHistoryRepository implements TaskHistorySavePort {
         'task_history',
       )
         .select(
-          'id',
+          'task_history.id as task_history_id',
           'type',
-          'created_at',
+          'task_history.created_at as created_at',
           'from_state',
           'to_state',
-          'tasks.id as task_id',
+          'task_id',
           'tasks.name as task_name',
           'tasks.updated_at as task_updated_at',
           'tasks.created_at as task_created_at',
         )
         .where({
-          id: result[0]!.id,
+          task_history_id: result[0]!.id,
         })
+        .debug(true)
         .leftJoin('tasks', { 'tasks.id': 'task_history.task_id' })
         .first();
 

@@ -15,8 +15,9 @@ export class TaskHistoryRepositoryMapper {
       created_at: taskHistory.task_created_at,
       updated_at: taskHistory.task_updated_at,
     });
+
     const props = TaskHistoryProps.from(
-      taskHistory.id,
+      taskHistory.task_history_id,
       taskEntity,
       taskHistory.type,
       taskHistory.from_state,

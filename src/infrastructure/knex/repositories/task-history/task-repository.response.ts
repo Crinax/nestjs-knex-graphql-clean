@@ -1,5 +1,5 @@
 export type TaskHistoryLoadResponse = {
-  id: number;
+  task_history_id: number;
   type: string;
   task_id: number;
   task_name: string;
