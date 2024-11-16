@@ -13,7 +13,6 @@ export class EventBusService implements IEventBus {
   async publish<T extends keyof EventDtos>(
     event: DomainEvent<T>,
   ): Promise<void> {
-    console.log('New event published: ', event);
     const handlers = this.handlers[event.name];
 
     if (handlers) {
@@ -33,7 +32,6 @@ export class EventBusService implements IEventBus {
       this.handlers[name] = [];
     }
 
-    console.log('New subscriber for: ', handler, name);
     this.handlers[name].push(handler);
   }
 }
