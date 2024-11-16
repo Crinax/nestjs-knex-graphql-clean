@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { EventBusProvider } from 'src/infrastructure/nestjs/adapters/event-bus/event-bus.provider';
 import { KnexProvider } from 'src/infrastructure/nestjs/adapters/knex/knex.provider';
 import { TaskCreteServiceProvider } from 'src/infrastructure/nestjs/adapters/tasks/services/task-create-service.provider';
 import { TaskAllGetServiceProvider } from 'src/infrastructure/nestjs/adapters/tasks/services/task-get-all-service.provider';
@@ -8,6 +9,7 @@ import { TaskUpdateNameServiceProvider } from 'src/infrastructure/nestjs/adapter
 @Module({
   providers: [
     KnexProvider,
+    EventBusProvider,
     TaskGetByIdServiceProvider,
     TaskAllGetServiceProvider,
     TaskUpdateNameServiceProvider,
