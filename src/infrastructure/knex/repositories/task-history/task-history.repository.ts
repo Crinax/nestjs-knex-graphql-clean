@@ -1,10 +1,11 @@
 import { TaskHistoryEntity } from 'src/core/entities/task-history/task-history.entity';
+import { TaskHistorySavePort } from 'src/core/ports/task-history/secondary/task-history-save.port';
 import { KnexDb } from 'src/infrastructure/knex/knex.infrastructure';
 import { IdResponse } from 'src/infrastructure/knex/repositories/common/responses';
 import { TaskHistoryRepositoryMapper } from 'src/infrastructure/knex/repositories/task-history/mappers/task-history-repository.mapper';
 import { TaskHistoryLoadResponse } from 'src/infrastructure/knex/repositories/task-history/task-repository.response';
 
-export class TaskHistoryRepository {
+export class TaskHistoryRepository implements TaskHistorySavePort {
   constructor(private readonly database: KnexDb) {}
 
   async save(taskHistory: TaskHistoryEntity): Promise<TaskHistoryEntity> {
